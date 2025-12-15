@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = ["63.177.124.117"]
+ALLOWED_HOSTS = ["localhost", "63.177.124.117", "127.0.0.1", "0.0.0.0"]
 
 # Application definition
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_spectacular",
 
     "users",
     "articles",
@@ -138,6 +139,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
 
 SIMPLE_JWT = {
@@ -154,3 +156,11 @@ CELERY_TIMEZONE = "UTC"  # Set your desired timezone
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60  # Soft time limit
 # ... other settings
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Artcle_hub API',
+    'DESCRIPTION': 'Best site you ever seen',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': True,
+    # OTHER SETTINGS
+}
