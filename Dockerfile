@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 8000
 
 # Указываем команду запуска контейнера
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "article_hub.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
