@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 from datetime import timedelta
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +25,8 @@ SECRET_KEY = "django-insecure-@vj34bs!3h0j9!h-56j^2)wv4p70$bg7f1gzhu%ta+lq@hkre*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",") if os.getenv("ALLOWED_HOSTS") else []
 
 # Application definition
 
@@ -80,8 +82,8 @@ WSGI_APPLICATION = "article_hub.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django_mongodb_backend",
-        "HOST": "mongodb://localhost:27017/",
-        "NAME": "article_hub",
+        "HOST": os.getenv("MONGODB_URI"),
+        "NAME": os.getenv("MONGODB_DB_NAME"),
     }
 }
 
@@ -144,7 +146,7 @@ SIMPLE_JWT = {
 PATH_LOG_CSV_FILE = BASE_DIR / "logs" / "logs.csv"
 
 # Celery Configuration Options
-CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TIMEZONE = "UTC"  # Set your desired timezone
 CELERY_TASK_TRACK_STARTED = True
