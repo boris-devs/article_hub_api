@@ -2,7 +2,7 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
+*__pycache__/
 local_settings.py
 db.sqlite3
 
@@ -13,7 +13,7 @@ venv/
 env/
 
 # IDE-specific files and OS files
-.idea/  # PyCharm-specific files
+*.idea/  # PyCharm-specific files
 .vscode/ # VS Code-specific files
 .DS_Store # macOS files
 Thumbs.db # Windows files
@@ -38,3 +38,5 @@ var/
 *.egg-info/
 .installed.cfg
 *.whl
+
+*logs/
