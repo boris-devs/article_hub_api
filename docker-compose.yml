@@ -42,7 +42,7 @@ services:
   web:
     build: .
     container_name: article_hub-web
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: gunicorn article_hub.wsgi:application --bind 0.0.0.0:8000 --workers 3
     ports:
       - "8000:8000"
     env_file:
